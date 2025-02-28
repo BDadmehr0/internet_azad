@@ -1,6 +1,32 @@
-import json
-
 import requests
+import json
+import base64
+
+def fetch_encoded_content(url_list, all_protocols):
+    for url in url_list:
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+
+            content = response.text
+            decoded_content = base64.urlsafe_b64decode(content).decode("utf-8")
+            
+            for line in decoded_content.splitlines():
+                line = line.strip()
+                if (
+                    line.startswith("vmess://")
+                    or line.startswith("vless://")
+                    or line.startswith("ss://")
+                    or line.startswith("trojan://")
+                ):
+                    all_protocols.append(line)
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error in {url}: {e}")
+
+encoded_urls = [
+    "https://github.com/Mohammadgb0078/IRV2ray/raw/refs/heads/main/vmess.txt",
+]
 
 urls = [
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
@@ -62,11 +88,12 @@ urls = [
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Turkey/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20Arab%20Emirates/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Hong%20Kong/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Serbia/config.txt",
 ]
 
 
 all_protocols = []
+
+fetch_encoded_content(encoded_urls, all_protocols)
 
 for url in urls:
     try:
