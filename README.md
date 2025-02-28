@@ -1,1 +1,1 @@
-# xray-collector
+# Internet Azad - اینترنت آزاد
