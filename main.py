@@ -1,9 +1,14 @@
 import requests
 import json
 import base64
+from tqdm import tqdm
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
 
 def fetch_encoded_content(url_list, all_protocols):
-    for url in url_list:
+    for url in tqdm(url_list, desc="Fetching encoded URLs", unit="URL"):
         try:
             response = requests.get(url, timeout=10)
             response.raise_for_status()
@@ -22,7 +27,7 @@ def fetch_encoded_content(url_list, all_protocols):
                     all_protocols.append(line)
 
         except requests.exceptions.RequestException as e:
-            print(f"Error in {url}: {e}")
+            console.print(f"[red]Error in {url}: {e}[/red]")
 
 encoded_urls = [
     "https://github.com/Mohammadgb0078/IRV2ray/raw/refs/heads/main/vmess.txt",
@@ -90,12 +95,11 @@ urls = [
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Hong%20Kong/config.txt",
 ]
 
-
 all_protocols = []
 
 fetch_encoded_content(encoded_urls, all_protocols)
 
-for url in urls:
+for url in tqdm(urls, desc="Fetching URLs", unit="URL"):
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
@@ -111,9 +115,35 @@ for url in urls:
                 all_protocols.append(line)
 
     except requests.exceptions.RequestException as e:
-        print(f"Error in {url}: {e}")
+        console.print(f"[red]Error in {url}: {e}[/red]")
 
 with open("all_protocols.json", "w", encoding="utf-8") as f:
     json.dump(all_protocols, f, indent=4, ensure_ascii=False)
 
-print(f"Collected {len(all_protocols)} protocol lines.")
+# Display the results in a table
+table = Table(title="Collected Protocols")
+table.add_column("Protocol", justify="right", style="cyan", no_wrap=True)
+table.add_column("Count", style="magenta")
+
+protocol_counts = {
+    "vmess": 0,
+    "vless": 0,
+    "ss": 0,
+    "trojan": 0
+}
+
+for protocol in all_protocols:
+    if protocol.startswith("vmess://"):
+        protocol_counts["vmess"] += 1
+    elif protocol.startswith("vless://"):
+        protocol_counts["vless"] += 1
+    elif protocol.startswith("ss://"):
+        protocol_counts["ss"] += 1
+    elif protocol.startswith("trojan://"):
+        protocol_counts["trojan"] += 1
+
+for protocol, count in protocol_counts.items():
+    table.add_row(protocol, str(count))
+
+console.print(table)
+console.print(f"[green]Collected {len(all_protocols)} protocol lines.[/green]")
