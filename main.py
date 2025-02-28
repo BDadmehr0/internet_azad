@@ -1,8 +1,6 @@
-import requests
 import json
 
-# https://github.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs
-# 
+import requests
 
 urls = [
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
@@ -67,7 +65,6 @@ urls = [
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Serbia/config.txt",
 ]
 
-# "",
 
 all_protocols = []
 
@@ -75,22 +72,21 @@ for url in urls:
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
-        
+
         for line in response.text.splitlines():
             line = line.strip()
             if (
-                line.startswith("vmess://") or
-                line.startswith("vless://") or
-                line.startswith("ss://") or
-                line.startswith("trojan://")
+                line.startswith("vmess://")
+                or line.startswith("vless://")
+                or line.startswith("ss://")
+                or line.startswith("trojan://")
             ):
                 all_protocols.append(line)
 
     except requests.exceptions.RequestException as e:
         print(f"Error in {url}: {e}")
 
-# ذخیره خروجی در فایل JSON (در صورت نیاز)
-with open('all_protocols.json', 'w', encoding='utf-8') as f:
+with open("all_protocols.json", "w", encoding="utf-8") as f:
     json.dump(all_protocols, f, indent=4, ensure_ascii=False)
 
 print(f"Collected {len(all_protocols)} protocol lines.")
