@@ -4,6 +4,7 @@ import base64
 from tqdm import tqdm
 from rich.console import Console
 from rich.table import Table
+from datetime import date
 
 console = Console()
 
@@ -199,3 +200,54 @@ for protocol, count in protocol_counts.items():
 
 console.print(table)
 console.print(f"[green]Collected {len(all_protocols)} protocol lines.[/green]")
+
+
+def save_protocols(protocol_type, all_protocols):
+    file_name = f"{protocol_type}_protocols_{date.today()}.txt"
+    with open(file_name, "w", encoding="utf-8") as file:
+        for protocol in all_protocols:
+            if protocol.startswith(f"{protocol_type}://"):
+                file.write(protocol + "\n")
+    print(f"{protocol_type.capitalize()} protocols saved to {file_name}")
+
+
+def save_all_protocols(all_protocols):
+    file_name = f"all_protocols_{date.today()}.txt"
+    with open(file_name, "w", encoding="utf-8") as file:
+        for protocol in all_protocols:
+            file.write(protocol + "\n")
+    print(f"All protocols saved to {file_name}")
+
+
+# Update the display_menu function to include saving logic
+def display_menu():
+    print("Please select an option to save:")
+    print("1. ss")
+    print("2. vless")
+    print("3. vmess")
+    print("4. trojan")
+    print("5. all protocols")
+
+    choice = input("Enter the number of your choice: ")
+
+    if choice == "1":
+        print("You selected: ss")
+        save_protocols("ss", all_protocols)
+    elif choice == "2":
+        print("You selected: vless")
+        save_protocols("vless", all_protocols)
+    elif choice == "3":
+        print("You selected: vmess")
+        save_protocols("vmess", all_protocols)
+    elif choice == "4":
+        print("You selected: trojan")
+        save_protocols("trojan", all_protocols)
+    elif choice == "5":
+        print("You selected: all protocols")
+        save_all_protocols(all_protocols)
+    else:
+        print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    display_menu()
