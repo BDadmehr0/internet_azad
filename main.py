@@ -7,6 +7,7 @@ from rich.table import Table
 
 console = Console()
 
+
 def fetch_encoded_content(url_list, all_protocols):
     for url in tqdm(url_list, desc="Fetching encoded URLs", unit="URL"):
         try:
@@ -15,7 +16,7 @@ def fetch_encoded_content(url_list, all_protocols):
 
             content = response.text
             decoded_content = base64.urlsafe_b64decode(content).decode("utf-8")
-            
+
             for line in decoded_content.splitlines():
                 line = line.strip()
                 if (
@@ -29,8 +30,48 @@ def fetch_encoded_content(url_list, all_protocols):
         except requests.exceptions.RequestException as e:
             console.print(f"[red]Error in {url}: {e}[/red]")
 
+
 encoded_urls = [
-    "https://github.com/Mohammadgb0078/IRV2ray/raw/refs/heads/main/vmess.txt",
+    "https://raw.githubusercontent.com/Mohammadgb0078/IRV2ray/refs/heads/main/vmess.txt",
+    "https://raw.githubusercontent.com/Mohammadgb0078/IRV2ray/refs/heads/main/vless.txt",
+    "https://raw.githubusercontent.com/freefq/free/refs/heads/master/v2",
+    "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/splitted/mixed",
+    "https://nodefree.githubrowcontent.com/2024/07/20240705.txt",
+    "https://raw.githubusercontent.com/wrfree/free/refs/heads/main/v2",
+    "https://raw.githubusercontent.com/wrfree/free/refs/heads/main/ssr",
+    "https://raw.githubusercontent.com/codingbox/Free-Node-Merge/refs/heads/main/node.txt",
+    "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/refs/heads/main/bpjzx1",
+    "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/refs/heads/main/bpjzx2",
+    "https://shadowmere.xyz/api/b64sub/",
+    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity",
+    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/refs/heads/main/splitted/hysteria2",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/shadowsocks",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Splitted-By-Protocol/ss.txt",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/shadowsocks",
+    "https://raw.githubusercontent.com/AzadNetCH/Clash/refs/heads/main/AzadNet_iOS.txt",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/tuic",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/hysteria",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/juicity",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/reality",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/trojan",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/vless",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/vmess",
+    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/trojan",
+    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/ss",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/ss.txt",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/trojan.txt",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/tuic",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/hysteria",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/juicity",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/reality",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/trojan",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/vless",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/vmess",
+    # "",
+    # "",
+    # "",
+    # "",
 ]
 
 urls = [
@@ -43,8 +84,6 @@ urls = [
     "https://raw.githubusercontent.com/imohammadkhalili/V2RAY/main/Mkhalili",
     "https://raw.githubusercontent.com/Jia-Pingwa/free-v2ray-merge/main/output.txt",
     "https://raw.githubusercontent.com/jikelonglie/meskell/main/meskell",
-    "https://raw.githubusercontent.com/budamu/clashconfig/main/v2ray.txt",
-    "https://raw.githubusercontent.com/budamu/clashconfig/main/v2ray2.txt",
     "https://raw.githubusercontent.com/vxiaov/free_proxies/main/links.txt",
     "https://raw.githubusercontent.com/mfuu/v2ray/master/merge/merge.txt",
     "https://raw.githubusercontent.com/resasanian/Mirza/main/mirza-all.txt",
@@ -68,7 +107,6 @@ urls = [
     "https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt",
     "https://raw.githubusercontent.com/Surfboardv2ray/Vfarid-fix/main/sub",
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt",
-    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
     "https://raw.githubusercontent.com/Everyday-VPN/Everyday-VPN/main/subscription/main.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/All_Configs_Sub.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Iran/config.txt",
@@ -88,12 +126,31 @@ urls = [
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Singapore/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Bahrain/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Slovak%20Republic/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/China/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20States/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Turkey/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20Arab%20Emirates/config.txt",
     "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Hong%20Kong/config.txt",
+    "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/all",
+    "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt",
+    "https://raw.githubusercontent.com/vxiaov/free_proxies/refs/heads/main/links.txt",
+    "https://raw.githubusercontent.com/HakurouKen/free-node/main/public",
+    "https://github.com/halfaaa/Free/blob/main/1.30.2023.txt",
+    "https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/sub/SSTime",
+    "https://robin.nscl.ir/",
+    "https://raw.githubusercontent.com/Proxydaemitelegram/Proxydaemi44/refs/heads/main/Proxydaemi44",
+    "https://raw.githubusercontent.com/ndsphonemy/proxy-sub/refs/heads/main/speed.txt",
+    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/Vless",
+    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/Reality",
+    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/SS",
+    "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/server.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub1.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub2.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub3.txt",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/vmess.txt",
+    # "",
+    # "",
 ]
+
 
 all_protocols = []
 
@@ -125,12 +182,7 @@ table = Table(title="Collected Protocols")
 table.add_column("Protocol", justify="right", style="cyan", no_wrap=True)
 table.add_column("Count", style="magenta")
 
-protocol_counts = {
-    "vmess": 0,
-    "vless": 0,
-    "ss": 0,
-    "trojan": 0
-}
+protocol_counts = {"vmess": 0, "vless": 0, "ss": 0, "trojan": 0}
 
 for protocol in all_protocols:
     if protocol.startswith("vmess://"):
