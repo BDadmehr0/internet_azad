@@ -16,7 +16,7 @@
 
 1. **Clone the Repository**: Clone the repository to your local machine using the following command:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/BDadmehr0/internet_azad
    ```
 
 2. **Install Python**: Ensure Python 3.x is installed on your system.
