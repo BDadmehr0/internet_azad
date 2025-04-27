@@ -40,7 +40,3 @@ We welcome contributions! To contribute:
 5. Submit a pull request to the main repository.
 
 Please ensure your code adheres to the project's coding standards and passes all tests.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
