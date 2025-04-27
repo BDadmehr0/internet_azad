@@ -29,14 +29,3 @@ The `requrments.txt` file should contain the following dependencies:
 - `rich`
 
 Ensure these libraries are installed for the script to function correctly.
-
-## Contribution Guidelines
-
-We welcome contributions! To contribute:
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with clear and concise messages.
-4. Push your changes to your fork.
-5. Submit a pull request to the main repository.
-
-Please ensure your code adheres to the project's coding standards and passes all tests.
