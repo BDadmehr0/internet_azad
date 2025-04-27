@@ -1,3 +1,4 @@
+یه کاری بکن قبل ذخیره  all تکراری هارو پاک بکنه بعد ذخیره :
 import requests
 import json
 import base64
@@ -7,6 +8,13 @@ from rich.table import Table
 
 console = Console()
 
+# اینجا فایل sub.json رو می‌خونیم
+with open("sub.json", "r", encoding="utf-8") as f:
+    subs = json.load(f)
+
+# دوتا لیست رو از فایل بیرون میکشیم
+encoded_urls = subs.get("encoded_subs", [])
+urls = subs.get("normal_subs", [])
 
 def fetch_encoded_content(url_list, all_protocols):
     for url in tqdm(url_list, desc="Fetching encoded URLs", unit="URL"):
@@ -27,135 +35,15 @@ def fetch_encoded_content(url_list, all_protocols):
                 ):
                     all_protocols.append(line)
 
-        except requests.exceptions.RequestException as e:
+        except (requests.exceptions.RequestException, base64.binascii.Error) as e:
             console.print(f"[red]Error in {url}: {e}[/red]")
-
-
-encoded_urls = [
-    "https://raw.githubusercontent.com/Mohammadgb0078/IRV2ray/refs/heads/main/vmess.txt",
-    "https://raw.githubusercontent.com/Mohammadgb0078/IRV2ray/refs/heads/main/vless.txt",
-    "https://raw.githubusercontent.com/freefq/free/refs/heads/master/v2",
-    "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/splitted/mixed",
-    "https://nodefree.githubrowcontent.com/2024/07/20240705.txt",
-    "https://raw.githubusercontent.com/wrfree/free/refs/heads/main/v2",
-    "https://raw.githubusercontent.com/wrfree/free/refs/heads/main/ssr",
-    "https://raw.githubusercontent.com/codingbox/Free-Node-Merge/refs/heads/main/node.txt",
-    "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/refs/heads/main/bpjzx1",
-    "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/refs/heads/main/bpjzx2",
-    "https://shadowmere.xyz/api/b64sub/",
-    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity",
-    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/refs/heads/main/splitted/hysteria2",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/shadowsocks",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Splitted-By-Protocol/ss.txt",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/shadowsocks",
-    "https://raw.githubusercontent.com/AzadNetCH/Clash/refs/heads/main/AzadNet_iOS.txt",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/tuic",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/hysteria",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/juicity",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/reality",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/trojan",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/vless",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/protocols/vmess",
-    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/trojan",
-    "https://raw.githubusercontent.com/Surfboardv2ray/TGParse/main/splitted/ss",
-    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/ss.txt",
-    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/trojan.txt",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/tuic",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/hysteria",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/juicity",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/reality",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/trojan",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/vless",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/refs/heads/main/channels/protocols/vmess",
-    # "",
-    # "",
-    # "",
-    # "",
-]
-
-urls = [
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
-    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
-    "https://raw.githubusercontent.com/LalatinaHub/Mineral/master/result/nodes",
-    "https://raw.githubusercontent.com/245237866/v2rayn/main/everydaynode",
-    "https://raw.githubusercontent.com/Creativveb/v2configs/main/updated",
-    "https://raw.githubusercontent.com/imohammadkhalili/V2RAY/main/Mkhalili",
-    "https://raw.githubusercontent.com/Jia-Pingwa/free-v2ray-merge/main/output.txt",
-    "https://raw.githubusercontent.com/jikelonglie/meskell/main/meskell",
-    "https://raw.githubusercontent.com/vxiaov/free_proxies/main/links.txt",
-    "https://raw.githubusercontent.com/mfuu/v2ray/master/merge/merge.txt",
-    "https://raw.githubusercontent.com/resasanian/Mirza/main/mirza-all.txt",
-    "https://raw.githubusercontent.com/Ashkan-m/v2ray/main/Sub.txt",
-    "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/row-url/actives.txt",
-    "https://raw.githubusercontent.com/SamanValipour1/My-v2ray-configs/main/MySub.txt",
-    "https://raw.githubusercontent.com/YasserDivaR/pr0xy/main/ShadowSocks2021.txt",
-    "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/row-url/all.txt",
-    "https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt",
-    "https://raw.githubusercontent.com/miladtahanian/V2RayCFGDumper/main/config.txt",
-    "https://raw.githubusercontent.com/Mahdi0024/ProxyCollector/master/sub/proxies.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub1.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub2.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub3.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub4.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub5.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub6.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub7.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub8.txt",
-    "https://raw.githubusercontent.com/Surfboardv2ray/Subs/main/Realm",
-    "https://raw.githubusercontent.com/youfoundamin/V2rayCollector/main/mixed_iran.txt",
-    "https://raw.githubusercontent.com/Surfboardv2ray/Vfarid-fix/main/sub",
-    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt",
-    "https://raw.githubusercontent.com/Everyday-VPN/Everyday-VPN/main/subscription/main.txt",
-    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/All_Configs_Sub.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Iran/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20Kingdom/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/France/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Ireland/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Germany/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Sweden/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Finland/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Czech%20Republic/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Poland/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Netherlands/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Italy/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Costa%20Rica/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Austria/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Switzerland/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Singapore/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Bahrain/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Slovak%20Republic/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20States/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Turkey/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/United%20Arab%20Emirates/config.txt",
-    "https://raw.githubusercontent.com/Epodonios/bulk-xray-v2ray-vless-vmess-...-configs/main/sub/Hong%20Kong/config.txt",
-    "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/all",
-    "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt",
-    "https://raw.githubusercontent.com/vxiaov/free_proxies/refs/heads/main/links.txt",
-    "https://raw.githubusercontent.com/HakurouKen/free-node/main/public",
-    "https://github.com/halfaaa/Free/blob/main/1.30.2023.txt",
-    "https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/sub/SSTime",
-    "https://robin.nscl.ir/",
-    "https://raw.githubusercontent.com/Proxydaemitelegram/Proxydaemi44/refs/heads/main/Proxydaemi44",
-    "https://raw.githubusercontent.com/ndsphonemy/proxy-sub/refs/heads/main/speed.txt",
-    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/Vless",
-    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/Reality",
-    "https://raw.githubusercontent.com/Mosifree/-FREE2CONFIG/refs/heads/main/SS",
-    "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/server.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub1.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub2.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/refs/heads/main/Sub3.txt",
-    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Splitted-By-Protocol/vmess.txt",
-    # "",
-    # "",
-]
-
 
 all_protocols = []
 
+# اول آدرس‌هایی که Base64 هستن رو می‌خونیم
 fetch_encoded_content(encoded_urls, all_protocols)
 
+# حالا آدرس‌های معمولی رو می‌خونیم
 for url in tqdm(urls, desc="Fetching URLs", unit="URL"):
     try:
         response = requests.get(url, timeout=10)
@@ -174,10 +62,11 @@ for url in tqdm(urls, desc="Fetching URLs", unit="URL"):
     except requests.exceptions.RequestException as e:
         console.print(f"[red]Error in {url}: {e}[/red]")
 
+# ذخیره همه‌ی پروتکل‌ها در فایل
 with open("all_protocols.json", "w", encoding="utf-8") as f:
     json.dump(all_protocols, f, indent=4, ensure_ascii=False)
 
-# Display the results in a table
+# نمایش نتایج
 table = Table(title="Collected Protocols")
 table.add_column("Protocol", justify="right", style="cyan", no_wrap=True)
 table.add_column("Count", style="magenta")
