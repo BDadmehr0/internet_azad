@@ -1,4 +1,3 @@
-یه کاری بکن قبل ذخیره  all تکراری هارو پاک بکنه بعد ذخیره :
 import requests
 import json
 import base64
